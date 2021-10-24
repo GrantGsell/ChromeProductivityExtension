@@ -3,7 +3,7 @@
 	"name": "Focus",
 	"version": "1.0",
 	"description": "Eliminate internet distractions",
-	"contesnt_scripts": [
+	"content_scripts": [
 		{
 			"matches": ["https://www.youtube.com/*"],
 			"js": ["./main.js"]
