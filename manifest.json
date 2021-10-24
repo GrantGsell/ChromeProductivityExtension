@@ -8,7 +8,7 @@
 			"matches": ["https://www.youtube.com/*"],
 			"js": ["./main.js"]
 		}
-	]
+	],
 	"icons": {
 		"16": "iconProductivity16.png",
 		"48": "iconProductivity48.png",
