@@ -3,10 +3,15 @@
 	"name": "Focus",
 	"version": "1.0",
 	"description": "Eliminate internet distractions",
-	"contesnt_scripts": [
+	"content_scripts": [
 		{
 			"matches": ["https://www.youtube.com/*"],
 			"js": ["./main.js"]
 		}
 	]
+	"icons": {
+		"16": "iconProductivity16.png",
+		"48": "iconProductivity48.png",
+		"128": "iconProductivity128.png"
+	}
 }
