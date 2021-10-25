@@ -13,5 +13,8 @@
 		"16": "iconProductivity16.png",
 		"48": "iconProductivity48.png",
 		"128": "iconProductivity128.png"
+	},
+	"browser_action" :{
+		"default_popup": "popup.html"
 	}
 }
