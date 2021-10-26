@@ -1,22 +1,51 @@
 body {
-  color: var(--popup-main-text-color);
-  background-color: var(--popup-background-color);
+	color: var(--popup-main-text-color);
+	background-color: var(--popup-background-color);
 }
 .wrapper {
-  font-size: 15px;
-  margin: 0px 0px 20px 0px;
-  width: 320px;
-  max-height: 606px;
+	font-size: 25px;
+	margin: 0px 0px 20px 0px;
+	width: 320px;
+	max-height: 606px;
 }
+
+/*
+  Title Bar Style
+*/
+.menu .titleBar{
+	position: flex;
+	display: inline-block;
+	top: 0;
+}
+.menu .titleText{
+	position: fixed;
+	top: 20px;
+	left: 60x;
+}
+.menu .icon{
+	position: relative;
+	top: 5px;
+}
+/*
+.menu b {
+  margin: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+*/
+
 
 /*
   Darkmode Switch Style
 */
 .switch{
-	position: relative;
+	position: fixed;
 	display: inline-block;
 	width: 60px;
 	height: 34px;
+	right: 0px;
+	top: 23px;
 }
 /* Hide default HTML checkbox */
 .switch input {
