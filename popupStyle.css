@@ -144,3 +144,27 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 	margin-right: 20px;
 }
 
+
+/*
+  Active Time Style
+*/
+.activeTime{
+	margin-top: 12px;
+}
+.activeTime .activeTimeTxt{
+	font-size: 20px;
+}
+.activeTime .setTimeBtn{
+	font-size: 15px;
+	margin-left: 10px;
+	border-radius: 6px;
+}
+.activeTime input{
+	width: 125px;
+	height: 30px;
+	margin-top: 5px;
+	border-radius: 10px;
+}
+.activeTime .startTime{
+	margin-right: 20px;
+}
