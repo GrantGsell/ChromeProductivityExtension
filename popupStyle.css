@@ -4,9 +4,10 @@ body {
 }
 .wrapper {
 	font-size: 25px;
-	margin: 0px 0px 20px 0px;
-	width: 320px;
-	max-height: 606px;
+	/*margin: 0px 0px 20px 0px;*/
+	width: 352px;
+	/*max-height: 606px;*/
+	height: 450px;
 }
 
 /*
@@ -26,15 +27,6 @@ body {
 	position: relative;
 	top: 5px;
 }
-/*
-.menu b {
-  margin: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-*/
-
 
 /*
   Darkmode Switch Style
@@ -92,4 +84,19 @@ input:checked + .darkmodeSlider:before {
 
 .darkmodeSlider:before {
   border-radius: 50%;
+}
+
+/*
+  Inner Container Styling
+*/
+.inner {
+	display: block;
+    width: 288px;
+	height: 400px;
+    background-color: grey;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
 }
