@@ -1,12 +1,9 @@
 body {
 	color: var(--popup-main-text-color);
-	background-color: var(--popup-background-color);
+	background-color: grey;
 }
 .wrapper {
-	font-size: 25px;
-	/*margin: 0px 0px 20px 0px;*/
 	width: 352px;
-	/*max-height: 606px;*/
 	height: 450px;
 }
 
@@ -19,6 +16,7 @@ body {
 	top: 0;
 }
 .menu .titleText{
+	font-size: 25px;
 	position: fixed;
 	top: 20px;
 	left: 60x;
@@ -36,7 +34,7 @@ body {
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-	right: 0px;
+	right: 10px;
 	top: 23px;
 }
 /* Hide default HTML checkbox */
@@ -92,23 +90,57 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 .inner {
 	display: block;
     width: 288px;
-	height: 400px;
+	height: 368px;
     background-color: white;
     margin-left: 16px;
     margin-right: 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
     padding-left: 16px;
     padding-right: 16px;
     border-radius: 4px;
 }
+.inner .onOffTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+}
 
 /*
-  Darkmode Switch Style
+  On Off Switch Style
 */
 .onOffSwitch{
 	position: fixed;
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-	margin-top: 30px;
+	margin-top: 0px;
 	left: 10%;
 }
+
+/*
+  Pause Section Style
+*/
+.pause{
+	display: block;
+	margin-top: 60px;
+}
+.pause .btnRow{
+	display: inline;
+	width: 100%;
+	height: 40px;
+	margin-top: 12px;
+	margin-bottom: 24px;
+}
+.pause .btnRow .btn{
+	font-size: 25px;
+	font-weight: 400px;
+	width: 130px;
+	height: auto;
+	border-radius: 6px;
+	text-align: center;
+}
+.pause .btnRow .btn.pauseOnce{
+	margin-right: 20px;
+}
+

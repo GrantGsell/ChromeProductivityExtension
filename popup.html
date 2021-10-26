@@ -23,11 +23,22 @@
 
 		<!-- Inner Container -->
 		<section class="inner">
-		  <text class="onOffTxt">Turn Extension On/Off</text>
-		  <label class="onOffSwitch">
-			<input type="checkbox">
-			<span class="onOffSlider"></span>
-		  </label>
+		  <!-- On/Off Toggle Switch Section -->
+		  <section class="onOff">
+			<div class="onOffTxt"><text class="onOffTxt">Turn Extension On/Off:</text></div>
+			<label class="onOffSwitch">
+			  <input type="checkbox">
+			  <span class="onOffSlider"></span>
+			</label>
+		  </section>
+		  <!-- Pause Button Section -->
+		  <section class="pause">
+			<div class="pauseTxt"><text class="pauseTxt">Pause on this site:</text></div>
+			<div class="btnRow">
+			  <button class="btn pauseOnce" onclick="">Once</button>
+			  <button class="btn pauseAlways" onclick="">Always</button>
+			</div>
+		  </section>
 		</section>		
 		
 	  </div>
