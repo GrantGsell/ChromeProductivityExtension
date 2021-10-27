@@ -1,10 +1,10 @@
-body {
+ body {
 	color: var(--popup-main-text-color);
 	background-color: grey;
 }
 .wrapper {
 	width: 352px;
-	height: 450px;
+	height: 350px;
 }
 
 /*
@@ -91,7 +91,7 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 .inner {
 	display: block;
     width: 288px;
-	height: 368px;
+	height: 268px;
     background-color: white;
     margin-left: 16px;
     margin-right: 16px;
