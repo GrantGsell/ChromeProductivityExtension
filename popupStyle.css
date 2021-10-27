@@ -1,0 +1,182 @@
+ body {
+	color: var(--popup-main-text-color);
+	background-color: grey;
+}
+.wrapper {
+	width: 352px;
+	height: 350px;
+}
+
+/*
+  Title Bar Style
+*/
+.menu .titleBar{
+	position: flex;
+	display: inline-block;
+	top: 0;
+}
+.menu .titleText{
+	font-size: 25px;
+	position: fixed;
+	top: 20px;
+	left: 60x;
+}
+.menu .icon{
+	position: relative;
+	top: 5px;
+}
+
+/*
+  Darkmode Switch Style
+*/
+.switch{
+	position: fixed;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	margin-top: 0px;
+	right: 10%;
+	
+}
+/* Hide default HTML checkbox */
+.switch input, .onOffSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.darkmodeSlider, .onOffSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.darkmodeSlider:before, .onOffSlider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .darkmodeSlider, input:checked + .onOffSlider {
+  background-color: #2196F3;
+}
+input:focus + .darkmodeSlider, input:focus + .onOffSlider {
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.darkmodeSlider, .onOffSlider {
+  border-radius: 34px;
+}
+
+.darkmodeSlider:before, .onOffSlider:before {
+  border-radius: 50%;
+}
+
+/*
+  Inner Container Styling
+*/
+.inner {
+	display: block;
+    width: 288px;
+	height: 268px;
+    background-color: white;
+    margin-left: 16px;
+    margin-right: 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+}
+.inner .toggleSwitches{
+	display: inline;
+}
+.inner .onOffTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+	width: 122px;
+}
+.inner .darkModeTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+	padding-left: 60px;
+	width: 50px;
+}
+
+/*
+  On Off Switch Style
+*/
+.onOffSwitch{
+	position: fixed;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	margin-top: 0px;
+	left: 10%;
+}
+
+/*
+  Pause Section Style
+*/
+.pause{
+	display: block;
+	margin-top: 60px;
+}
+.pause .btnRow{
+	display: inline;
+	width: 100%;
+	height: 40px;
+	margin-top: 12px;
+	margin-bottom: 24px;
+}
+.pause .btnRow .btn{
+	font-size: 25px;
+	font-weight: 400px;
+	width: 130px;
+	height: 35px;
+	border-radius: 6px;
+	text-align: center;
+}
+.pause .btnRow .btn.pauseOnce{
+	margin-right: 20px;
+}
+
+
+/*
+  Active Time Style
+*/
+.activeTime{
+	margin-top: 12px;
+}
+.activeTime .activeTimeTxt{
+	font-size: 20px;
+}
+.activeTime .setTimeBtn{
+	font-size: 15px;
+	margin-left: 10px;
+	border-radius: 6px;
+}
+.activeTime input{
+	width: 125px;
+	height: 35px;
+	margin-top: 5px;
+	border-radius: 10px;
+}
+.activeTime .startTime{
+	margin-right: 20px;
+}
