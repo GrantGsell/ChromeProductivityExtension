@@ -15,34 +15,38 @@
 		<div class="titleBar">
 		  <img class="icon" alt="Icon" src="/iconProductivity48.png">
 		  <b class="titleText">Productivity</b>
-		  <label class="switch">
-			<input type="checkbox">
-			<span class="darkmodeSlider"></span>
-		  </label>
 		</div>
 
 		<!-- Inner Container -->
 		<section class="inner">
 		  <!-- On/Off Toggle Switch Section -->
-		  <section class="onOff">
-			<div class="onOffTxt"><text class="onOffTxt">Turn Extension On/Off:</text></div>
+		  <section class="toggleSwitches">
+			<div class="toggleTxt">
+			  <text class="onOffTxt">Turn Extension On/Off:</text>
+			  <text class="darkModeTxt">DarkMode</text>
+			</div>
 			<label class="onOffSwitch">
 			  <input type="checkbox">
 			  <span class="onOffSlider"></span>
+			</label>
+			<label class="switch">
+			  <input type="checkbox">
+			  <span class="darkmodeSlider"></span>
 			</label>
 		  </section>
 		  <!-- Pause Button Section -->
 		  <section class="pause">
 			<div class="pauseTxt"><text class="pauseTxt">Pause on this site:</text></div>
 			<div class="btnRow">
-			  <button class="btn pauseOnce" onclick="">Once</button>
-			  <button class="btn pauseAlways" onclick="">Always</button>
+			  <button class="btn pauseOnce">Once</button>
+			  <button class="btn pauseAlways">Always</button>
 			</div>
 		  </section>
 		  <!-- Set Active Time Section -->
 		  <section class="activeTime">
 			<div class="activeTimeTxt">
-			  <text class="activeTimeTxt">Set the active block time:</text><button class="setTimeBtn" onclick="">Set</button>
+			  <text class="activeTimeTxt">Set the active block time:</text>
+			  <button class="setTimeBtn">Set</button>
 			</div>
 			<input type="time" class="startTime">
 			<input type="time" class="endTime">

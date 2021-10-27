@@ -34,8 +34,9 @@ body {
 	display: inline-block;
 	width: 60px;
 	height: 34px;
-	right: 10px;
-	top: 23px;
+	margin-top: 0px;
+	right: 10%;
+	
 }
 /* Hide default HTML checkbox */
 .switch input, .onOffSwitch input {
@@ -100,10 +101,21 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
     padding-right: 16px;
     border-radius: 4px;
 }
+.inner .toggleSwitches{
+	display: inline;
+}
 .inner .onOffTxt{
 	font-size: 14px;
 	font-weight: 500;
 	padding-top: 15px;
+	width: 122px;
+}
+.inner .darkModeTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+	padding-left: 60px;
+	width: 50px;
 }
 
 /*
@@ -136,7 +148,7 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 	font-size: 25px;
 	font-weight: 400px;
 	width: 130px;
-	height: auto;
+	height: 35px;
 	border-radius: 6px;
 	text-align: center;
 }
@@ -161,7 +173,7 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 }
 .activeTime input{
 	width: 125px;
-	height: 30px;
+	height: 35px;
 	margin-top: 5px;
 	border-radius: 10px;
 }
