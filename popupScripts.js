@@ -1,34 +1,34 @@
 'use strict';
 chrome.runtime.getBackgroundPage(darkMode);
-//chrome.runtime.getBackgroundPage(extensionOnOff);
+chrome.runtime.getBackgroundPage(extensionOnOff);
+
 
 function darkMode(){
-	let dmFlag;
-	const temp2 = document.getElementById("test");
-	
-	temp2.addEventListener('change', function () {
-		chrome.storage.local.set({"test": temp2.checked}, function() {
-			console.log('Value is set to ' + temp2.checked);
-		});
-		changeTheme(temp2.checked);
-	});
+	const dmFlag = "test"
+	toggleChange("test", dmFlag, changeTheme);
 }
 
 
 function extensionOnOff(){
-	const onOffFlag = document.getElementById("onOff");
+	const onOffFlag = "onOff";
+	toggleChange(onOffFlag, onOffFlag, changeTheme);
+}
 
-	// Event listner for on off toggle switch
-	onOffFlag.addEventListener('change', function () {
-		if(onOffFlag.checked){
-			console.log("OFF");
-			return false;
-		}else{
-			console.log("ON");
-			return true;
-		}
+
+function toggleChange(toggleElemId, key, callback){
+	// Obtain element via id
+	const elem = document.getElementById(toggleElemId);
+
+	// Set event listener for toggle change
+	elem.addEventListener('change', function(){
+		chrome.storage.local.set({key: elem.checked}, function(){
+			
+			console.log("Toggle Set: " + elem.checked);
+		});
+		callback(elem.checked);
 	});
 }
+
 
 window.onload = function(){
 	console.log("WINDOW OPENED");
