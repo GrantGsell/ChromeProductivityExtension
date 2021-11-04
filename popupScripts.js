@@ -4,42 +4,42 @@ chrome.runtime.getBackgroundPage(extensionOnOff);
 
 
 function darkMode(){
-	const dmFlag = "test"
-	toggleChange("test", dmFlag, changeTheme);
+	const dmFlag = toggleChange('test', changeTheme);
 }
 
 
 function extensionOnOff(){
-	const onOffFlag = "onOff";
-	toggleChange(onOffFlag, onOffFlag, changeTheme);
+	const onOffFlag = toggleChange('onOff', turnExtensionOnOff);
 }
 
 
-function toggleChange(toggleElemId, key, callback){
-	// Obtain element via id
-	const elem = document.getElementById(toggleElemId);
-
+function toggleChange(elemId, callback){
+	const elem = document.getElementById(elemId);
+	
 	// Set event listener for toggle change
-	elem.addEventListener('change', function(){
-		chrome.storage.local.set({key: elem.checked}, function(){
-			
+	return elem.addEventListener('change', function(){
+		chrome.storage.local.set({'test': elem.checked}, function(){
 			console.log("Toggle Set: " + elem.checked);
+			callback(elem.checked);
 		});
-		callback(elem.checked);
 	});
 }
 
 
 window.onload = function(){
-	console.log("WINDOW OPENED");
-	chrome.storage.local.get(['test'], function(res){
-		console.log("Value on Window Open: " + res.test);
-		const toggleElem = document.getElementById("test");
+	const t0 = 'test';
+	const t1 = 'onOff';
+	chrome.storage.local.get([t0], function(res){
+		const toggleElem = document.getElementById(t0);
 		toggleElem.checked = res.test;
 		changeTheme(res.test);
 	});
 }
 
+
+function turnExtensionOnOff(){
+	console.log("Do Something");
+}
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
