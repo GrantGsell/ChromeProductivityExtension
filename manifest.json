@@ -14,6 +14,9 @@
 		"48": "iconProductivity48.png",
 		"128": "iconProductivity128.png"
 	},
+	"permissions": [
+		"storage"
+	],
 	"browser_action" :{
 		"default_popup": "popup.html"
 	}
