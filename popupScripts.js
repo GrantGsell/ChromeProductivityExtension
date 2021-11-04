@@ -4,12 +4,14 @@ chrome.runtime.getBackgroundPage(extensionOnOff);
 
 
 function darkMode(){
-	const dmFlag = toggleChange('test', changeTheme);
+	const temp = 'test'
+	const dmFlag = toggleChange(temp, changeTheme);
 }
 
 
 function extensionOnOff(){
-	const onOffFlag = toggleChange('onOff', turnExtensionOnOff);
+	//const onOffFlag = toggleChange('onOff', turnExtensionOnOff);
+	const onOffFlag = turnExtensionOnOff();
 }
 
 
@@ -18,8 +20,9 @@ function toggleChange(elemId, callback){
 	
 	// Set event listener for toggle change
 	return elem.addEventListener('change', function(){
+		localMemSet(elemId, elem.checked);
+		callback(elem.checked);
 		chrome.storage.local.set({'test': elem.checked}, function(){
-			console.log("Toggle Set: " + elem.checked);
 			callback(elem.checked);
 		});
 	});
@@ -29,17 +32,51 @@ function toggleChange(elemId, callback){
 window.onload = function(){
 	const t0 = 'test';
 	const t1 = 'onOff';
-	chrome.storage.local.get([t0], function(res){
+	chrome.storage.local.get(['test'], function(res){
 		const toggleElem = document.getElementById(t0);
 		toggleElem.checked = res.test;
 		changeTheme(res.test);
+	});
+
+	chrome.storage.local.get(['onOff'], function(res){
+		console.log("On open, onOff: " + res.onOff);
+		const toggleOnOff = document.getElementById(t1);
+		toggleOnOff.checked = res.onOff;
 	});
 }
 
 
 function turnExtensionOnOff(){
-	console.log("Do Something");
+	const elem = document.getElementById("onOff");
+	return elem.addEventListener('change', function(){
+		chrome.storage.local.set({'onOff': elem.checked}, function(){
+			console.log("On Off Toggle: " + elem.checked);
+		});
+	});
 }
+
+
+function localMemGet(key){
+	let value;
+	chrome.storage.local.get([key], function(res){
+		let entriesArray = Object.entries(res);
+		let key = entriesArray[0][0];
+		value = entriesArray[0][1];
+	});
+	return value;
+f}
+
+
+function localMemSet(key, value){
+	chrome.storage.local.set({[key] : value}, function(res){
+		if(!chrome.runtime.lastError){
+			// set storage value successfully.
+			console.log("SET");
+		}
+	});
+}
+
+
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
