@@ -11,7 +11,6 @@ function darkMode(){
 
 
 function extensionOnOff(){
-	//const onOffFlag = toggleChange('onOff', turnExtensionOnOff);
 	const onOffFlag = turnExtensionOnOff();
 }
 
