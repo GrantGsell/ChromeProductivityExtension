@@ -96,9 +96,12 @@ function setActiveTime(){
 	// Ensure both times are valid
 	if(timeStart.length == 0 || timeEnd.length == 0 || diff <= 0){
 		// Input errror
-		console.log("Time Error");
+		errorText("Invalid Time(s)");
 		return;
-	} 
+	}
+
+	// No error, set empty error message
+	errorText("");
 
 	// Set local data to input data
 	localMemSet('timeStart', timeStart);
@@ -126,6 +129,12 @@ function eventBtnClick(btnId, callback){
 	return elem.addEventListener('click', function(){
 		callback();
 	});
+}
+
+
+function errorText(errMsg){
+	const errElem = document.getElementById('errorText');
+	errElem.innerHTML = errMsg;
 }
 
 
