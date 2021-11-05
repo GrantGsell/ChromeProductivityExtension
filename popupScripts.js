@@ -1,6 +1,7 @@
 'use strict';
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
+chrome.runtime.getBackgroundPage(setBtnEvent);
 
 
 function darkMode(){
@@ -112,6 +113,14 @@ function getActiveTime(){
 		timeEnd = res.timeEnd;
 		document.getElementById("startTime").value = timeStart;
 		document.getElementById("endTime").value = timeEnd;
+	});
+}
+
+
+function setBtnEvent(){
+	const elem = document.getElementById("setBtn");
+	return elem.addEventListener('click', function(){
+		setActiveTime();
 	});
 }
 
