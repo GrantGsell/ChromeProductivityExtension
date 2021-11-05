@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width", initial-scale=1>
 	<link rel="stylesheet" href="popupStyle.css"/>
-	<script src="popupScripts.js" type="text/javascript"></script>
+	<script type="text/javascript" src="popupScripts.js"></script>
   </head>
 
   
@@ -27,7 +27,7 @@
 			  <text class="darkModeTxt">DarkMode</text>
 			</div>
 			<label class="onOffSwitch">
-			  <input type="checkbox">
+			  <input id="onOff" type="checkbox">
 			  <span class="onOffSlider"></span>
 			</label>
 			<label class="switch">
@@ -47,11 +47,15 @@
 		  <section class="activeTime">
 			<div class="activeTimeTxt">
 			  <text class="activeTimeTxt">Set the active block time:</text>
-			  <button class="setTimeBtn">Set</button>
+			  <button id="setBtn" class="setTimeBtn">Set</button>
 			</div>
-			<input type="time" class="startTime">
-			<input type="time" class="endTime">
+			<input type="time" id="startTime" class="startTime">
+			<input type="time" id="endTime" class="endTime">
 		  </section>
+		  <!-- Error Messages -->
+		  <section>
+			<text id="errorText"></text>
+		  </section>	
 		</section>		
 		
 	  </div>
