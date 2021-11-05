@@ -32,17 +32,23 @@ function toggleChange(elemId, callback){
 window.onload = function(){
 	const t0 = 'test';
 	const t1 = 'onOff';
+
+	// Read Darkmode Toggle Switch Local Data
 	chrome.storage.local.get(['test'], function(res){
 		const toggleElem = document.getElementById(t0);
 		toggleElem.checked = res.test;
 		changeTheme(res.test);
 	});
 
+	// Read onOff Toggle Switch Local Data
 	chrome.storage.local.get(['onOff'], function(res){
 		console.log("On open, onOff: " + res.onOff);
 		const toggleOnOff = document.getElementById(t1);
 		toggleOnOff.checked = res.onOff;
 	});
+
+	// Read Time Input Local Data
+	getActiveTime();
 }
 
 
@@ -76,6 +82,38 @@ function localMemSet(key, value){
 	});
 }
 
+
+function setActiveTime(){	
+	// Obtain start and end time
+	let timeStart = document.getElementById("startTime").value;
+	let timeEnd = document.getElementById("endTime").value;
+	
+	// Time difference:
+	let datePadding = "01 Jan 1970 ";
+	const diff = Date.parse(datePadding + timeEnd) - Date.parse(datePadding + timeStart);
+	
+	// Ensure both times are valid
+	if(timeStart.length == 0 || timeEnd.length == 0 || diff <= 0){
+		// Input errror
+		console.log("Time Error");
+		return;
+	} 
+
+	// Set local data to input data
+	localMemSet('timeStart', timeStart);
+	localMemSet('timeEnd', timeEnd);
+}
+
+function getActiveTime(){
+	let timeStart;
+	let timeEnd;
+	chrome.storage.local.get(['timeStart', 'timeEnd'], function(res){
+		timeStart = res.timeStart;
+		timeEnd = res.timeEnd;
+		document.getElementById("startTime").value = timeStart;
+		document.getElementById("endTime").value = timeEnd;
+	});
+}
 
 
 function changeTheme(themeFlag){
