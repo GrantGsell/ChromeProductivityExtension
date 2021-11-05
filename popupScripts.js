@@ -118,9 +118,13 @@ function getActiveTime(){
 
 
 function setBtnEvent(){
-	const elem = document.getElementById("setBtn");
+	const setBtn = eventBtnClick('setBtn', setActiveTime);
+}
+
+function eventBtnClick(btnId, callback){
+	const elem = document.getElementById(btnId);
 	return elem.addEventListener('click', function(){
-		setActiveTime();
+		callback();
 	});
 }
 
@@ -132,7 +136,7 @@ function changeTheme(themeFlag){
 	const inner = document.querySelector('.inner');
 	const onOff = document.querySelector('.onOffTxt');
 	const darkMode = document.querySelector('.darkModeTxt');
-	const pause = document.querySelector('.pauseTxt');
+ 	const pause = document.querySelector('.pauseTxt');
 	const once  = document.querySelector('.btn.pauseOnce');
 	const always  = document.querySelector('.btn.pauseAlways');
 	const active = document.querySelector('.activeTimeTxt');
