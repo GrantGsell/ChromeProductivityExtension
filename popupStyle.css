@@ -55,30 +55,43 @@
 	font-size: 14px;
 	font-weight: 500;
 	padding-top: 15px;
-	padding-left: 60px;
+	padding-left: 90px;
 	width: 50px;
 }
 
 
+/*
+  On Off Switch Style
+*/
+.onOffSwitch{
+	position: fixed;
+	display: inline-block;
+	width: 90px;
+	height: 34px;
+	margin-top: 0px;
+	left: 10%;
+}
 /*
   Darkmode Switch Style
 */
 .switch{
 	position: fixed;
 	display: inline-block;
-	width: 60px;
+	width: 90px;
 	height: 34px;
 	margin-top: 0px;
 	right: 10%;
 	
 }
-/* Hide default HTML checkbox */
-.switch input, .onOffSwitch input {
+/*
+  Toggle Switch Shared Style
+*/
+.onOffSwitch input, .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-.darkmodeSlider, .onOffSlider {
+.onOffSlider, .darkmodeSlider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -89,7 +102,7 @@
   -webkit-transition: .4s;
   transition: .4s;
 }
-.darkmodeSlider:before, .onOffSlider:before {
+.onOffSlider:before, .darkmodeSlider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -100,37 +113,25 @@
   -webkit-transition: .4s;
   transition: .4s;
 }
-input:checked + .darkmodeSlider, input:checked + .onOffSlider {
+input:checked + .onOffSlider, input:checked + .darkmodeSlider {
   background-color: #2196F3;
 }
-input:focus + .darkmodeSlider, input:focus + .onOffSlider {
+input:focus + .onOffSlider, input:focus + .darkmodeSlider {
   box-shadow: 0 0 1px #2196F3;
 }
-input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
+input:checked + .onOffSlider:before, input:checked + .darkmodeSlider:before {
   -webkit-transform: translateX(55px);
   -ms-transform: translateX(55px);
   transform: translateX(55px);
 }
-.darkmodeSlider, .onOffSlider {
+.onOffSlider, .darkmodeSlider {
   border-radius: 34px;
 }
 
-.darkmodeSlider:before, .onOffSlider:before {
+.onOffSlider:before, .darkmodeSlider:before {
   border-radius: 50%;
 }
-
-/*
-  On Off Switch Style
-*/
-.onOffSwitch{
-	position: absolute;
-	display: inline-block;
-	width: 90px;
-	height: 34px;
-	margin-top: 0px;
-	left: 10%;
-}
-.onOffSlider:after{
+.onOffSlider:after, .darkmodeSlider:after{
 	content:'OFF';
 	color: white;
 	display: block;
@@ -141,9 +142,10 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 	font-size: 10px;
 	font-family: Verdana, sans-serif;
 }
-input:checked + .onOffSlider:after{  
+input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{  
 	content: "On";
 }
+
 
 /*
   Pause Section Style
