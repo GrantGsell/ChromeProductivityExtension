@@ -27,6 +27,40 @@
 }
 
 /*
+  Inner Container Styling
+*/
+.inner {
+	display: block;
+    width: 288px;
+	height: 268px;
+    background-color: white;
+    margin-left: 16px;
+    margin-right: 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 4px;
+}
+.inner .toggleSwitches{
+	display: inline;
+}
+.inner .onOffTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+	width: 122px;
+}
+.inner .darkModeTxt{
+	font-size: 14px;
+	font-weight: 500;
+	padding-top: 15px;
+	padding-left: 60px;
+	width: 50px;
+}
+
+
+/*
   Darkmode Switch Style
 */
 .switch{
@@ -73,9 +107,9 @@ input:focus + .darkmodeSlider, input:focus + .onOffSlider {
   box-shadow: 0 0 1px #2196F3;
 }
 input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(55px);
+  -ms-transform: translateX(55px);
+  transform: translateX(55px);
 }
 .darkmodeSlider, .onOffSlider {
   border-radius: 34px;
@@ -86,48 +120,29 @@ input:checked + .darkmodeSlider:before, input:checked + .onOffSlider:before {
 }
 
 /*
-  Inner Container Styling
-*/
-.inner {
-	display: block;
-    width: 288px;
-	height: 268px;
-    background-color: white;
-    margin-left: 16px;
-    margin-right: 16px;
-	margin-top: 16px;
-	margin-bottom: 16px;
-    padding-left: 16px;
-    padding-right: 16px;
-    border-radius: 4px;
-}
-.inner .toggleSwitches{
-	display: inline;
-}
-.inner .onOffTxt{
-	font-size: 14px;
-	font-weight: 500;
-	padding-top: 15px;
-	width: 122px;
-}
-.inner .darkModeTxt{
-	font-size: 14px;
-	font-weight: 500;
-	padding-top: 15px;
-	padding-left: 60px;
-	width: 50px;
-}
-
-/*
   On Off Switch Style
 */
 .onOffSwitch{
-	position: fixed;
+	position: absolute;
 	display: inline-block;
-	width: 60px;
+	width: 90px;
 	height: 34px;
 	margin-top: 0px;
 	left: 10%;
+}
+.onOffSlider:after{
+	content:'OFF';
+	color: white;
+	display: block;
+	position: absolute;
+	transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	font-size: 10px;
+	font-family: Verdana, sans-serif;
+}
+input:checked + .onOffSlider:after{  
+	content: "On";
 }
 
 /*
