@@ -55,7 +55,7 @@
 	font-size: 14px;
 	font-weight: 500;
 	padding-top: 15px;
-	padding-left: 90px;
+	padding-left: 100px;
 	width: 50px;
 }
 
@@ -69,7 +69,7 @@
 	width: 90px;
 	height: 34px;
 	margin-top: 0px;
-	left: 10%;
+	left: 12.5%;
 }
 /*
   Darkmode Switch Style
@@ -172,7 +172,6 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 .pause .btnRow .btn.pauseOnce{
 	margin-right: 20px;
 }
-
 
 /*
   Active Time Style
