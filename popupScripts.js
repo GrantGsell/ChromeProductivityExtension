@@ -67,8 +67,8 @@ function localMemGet(key){
 		let entriesArray = Object.entries(res);
 		let key = entriesArray[0][0];
 		value = entriesArray[0][1];
+		return value;
 	});
-	return value;
 }
 
 
@@ -88,7 +88,6 @@ function setActiveTime(){
 	let timeEnd = document.getElementById("endTime").value;
 	
 	// Time difference:
-//	let datePadding = "01 Jan 1970 ";
 	let datePadding = new Date();
 	let currDate = datePadding.toString().slice(0,16);
 	console.log(currDate);
@@ -108,6 +107,7 @@ function setActiveTime(){
 	localMemSet('timeStart', timeStart);
 	localMemSet('timeEnd', timeEnd);
 }
+
 
 function getActiveTime(){
 	let timeStart;
@@ -137,7 +137,6 @@ function errorText(errMsg){
 	const errElem = document.getElementById('errorText');
 	errElem.innerHTML = errMsg;
 }
-
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
