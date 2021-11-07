@@ -4,4 +4,14 @@
 
 // jQuery code to simplify above JS code
 var contents = $('#contents');
-contents.remove();
+var parent = $('#contents').parentElement;
+
+// Simple dynamic extension control 
+chrome.storage.local.get(['onOff'], function(res){
+	var onFlag  = res.onOff;
+	if(onFlag){
+		contents.remove();
+	}else{
+		parent.prepend(contents);
+	}
+});
