@@ -6,7 +6,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["main.js"]
+			"js": ["jquery.min.js", "popupScripts.js", "main.js"]
 		}
 	],
 	"icons": {
@@ -14,6 +14,9 @@
 		"48": "iconProductivity48.png",
 		"128": "iconProductivity128.png"
 	},
+	"permissions": [
+		"storage"
+	],
 	"browser_action" :{
 		"default_popup": "popup.html"
 	}

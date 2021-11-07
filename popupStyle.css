@@ -20,6 +20,7 @@
 	position: fixed;
 	top: 20px;
 	left: 60x;
+	font-family: 'Ubuntu', sans-serif;
 }
 .menu .icon{
 	position: relative;
@@ -168,6 +169,7 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	height: 35px;
 	border-radius: 6px;
 	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
 }
 .pause .btnRow .btn.pauseOnce{
 	margin-right: 20px;
@@ -181,6 +183,7 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 }
 .activeTime .activeTimeTxt{
 	font-size: 20px;
+	font-family: 'Ubuntu', sans-serif;
 }
 .activeTime .setTimeBtn{
 	font-size: 15px;
@@ -195,4 +198,15 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 }
 .activeTime .startTime{
 	margin-right: 20px;
+}
+
+/*
+  Error Message
+*/
+#errorText{
+	position: relative;
+	left: 33%;
+	font-size: 16px;
+	color: red;
+	font-family: 'Ubuntu', sans-serif;
 }
