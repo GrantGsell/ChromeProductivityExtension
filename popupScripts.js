@@ -42,7 +42,6 @@ window.onload = function(){
 
 	// Read onOff Toggle Switch Local Data
 	chrome.storage.local.get(['onOff'], function(res){
-		console.log("On open, onOff: " + res.onOff);
 		const toggleOnOff = document.getElementById(t1);
 		toggleOnOff.checked = res.onOff;
 	});
@@ -56,7 +55,7 @@ function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
 	return elem.addEventListener('change', function(){
 		chrome.storage.local.set({'onOff': elem.checked}, function(){
-			console.log("On Off Toggle: " + elem.checked);
+			//console.log("On Off Toggle: " + elem.checked);
 		});
 	});
 }
@@ -70,7 +69,7 @@ function localMemGet(key){
 		value = entriesArray[0][1];
 	});
 	return value;
-f}
+}
 
 
 function localMemSet(key, value){
@@ -89,8 +88,11 @@ function setActiveTime(){
 	let timeEnd = document.getElementById("endTime").value;
 	
 	// Time difference:
-	let datePadding = "01 Jan 1970 ";
-	const diff = Date.parse(datePadding + timeEnd) - Date.parse(datePadding + timeStart);
+//	let datePadding = "01 Jan 1970 ";
+	let datePadding = new Date();
+	let currDate = datePadding.toString().slice(0,16);
+	console.log(currDate);
+	const diff = Date.parse(currDate + timeEnd) - Date.parse(currDate + timeStart);
 	
 	// Ensure both times are valid
 	if(timeStart.length == 0 || timeEnd.length == 0 || diff <= 0){
