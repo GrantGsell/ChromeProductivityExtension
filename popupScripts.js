@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
@@ -96,12 +96,12 @@ function setActiveTime(){
 	// Ensure both times are valid
 	if(timeStart.length == 0 || timeEnd.length == 0 || diff <= 0){
 		// Input errror
-		errorText("Invalid Time(s)");
+		errorText("Invalid Time(s)", true);
 		return;
 	}
 
 	// No error, set empty error message
-	errorText("");
+	errorText("Time Set!", false);
 
 	// Set local data to input data
 	localMemSet('timeStart', timeStart);
@@ -133,9 +133,18 @@ function eventBtnClick(btnId, callback){
 }
 
 
-function errorText(errMsg){
+function errorText(errMsg, isError){
+	// Error message element
 	const errElem = document.getElementById('errorText');
 	errElem.innerHTML = errMsg;
+	if(isError){
+		errElem.style.color = "red";
+	}else{
+		errElem.style.color = "green";
+		setTimeout(function(){
+			errElem.innerHTML = "";
+		}, 1000);
+	}
 }
 
 function changeTheme(themeFlag){
