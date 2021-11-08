@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
@@ -42,7 +42,6 @@ window.onload = function(){
 
 	// Read onOff Toggle Switch Local Data
 	chrome.storage.local.get(['onOff'], function(res){
-		console.log("On open, onOff: " + res.onOff);
 		const toggleOnOff = document.getElementById(t1);
 		toggleOnOff.checked = res.onOff;
 	});
@@ -56,7 +55,7 @@ function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
 	return elem.addEventListener('change', function(){
 		chrome.storage.local.set({'onOff': elem.checked}, function(){
-			console.log("On Off Toggle: " + elem.checked);
+			//console.log("On Off Toggle: " + elem.checked);
 		});
 	});
 }
@@ -68,9 +67,9 @@ function localMemGet(key){
 		let entriesArray = Object.entries(res);
 		let key = entriesArray[0][0];
 		value = entriesArray[0][1];
+		return value;
 	});
-	return value;
-f}
+}
 
 
 function localMemSet(key, value){
@@ -89,23 +88,26 @@ function setActiveTime(){
 	let timeEnd = document.getElementById("endTime").value;
 	
 	// Time difference:
-	let datePadding = "01 Jan 1970 ";
-	const diff = Date.parse(datePadding + timeEnd) - Date.parse(datePadding + timeStart);
+	let datePadding = new Date();
+	let currDate = datePadding.toString().slice(0,16);
+	console.log(currDate);
+	const diff = Date.parse(currDate + timeEnd) - Date.parse(currDate + timeStart);
 	
 	// Ensure both times are valid
 	if(timeStart.length == 0 || timeEnd.length == 0 || diff <= 0){
 		// Input errror
-		errorText("Invalid Time(s)");
+		errorText("Invalid Time(s)", true);
 		return;
 	}
 
 	// No error, set empty error message
-	errorText("");
+	errorText("Time Set!", false);
 
 	// Set local data to input data
 	localMemSet('timeStart', timeStart);
 	localMemSet('timeEnd', timeEnd);
 }
+
 
 function getActiveTime(){
 	let timeStart;
@@ -131,11 +133,19 @@ function eventBtnClick(btnId, callback){
 }
 
 
-function errorText(errMsg){
+function errorText(errMsg, isError){
+	// Error message element
 	const errElem = document.getElementById('errorText');
 	errElem.innerHTML = errMsg;
+	if(isError){
+		errElem.style.color = "red";
+	}else{
+		errElem.style.color = "green";
+		setTimeout(function(){
+			errElem.innerHTML = "";
+		}, 1000);
+	}
 }
-
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
