@@ -34,6 +34,7 @@ function checkExtensionStatus(evt){
 
 window.addEventListener("load", function(){
 	console.log(window.location.href);
+	console.log(getBaseUrl());
 	checkExtensionStatus();
 });
 
@@ -41,3 +42,23 @@ window.addEventListener("load", function(){
 var timerID = setInterval(function(){
 	checkExtensionStatus();
 }, 60 * 1000);
+
+// Function for obtaining ull up to top-level domain, inclusive
+function getBaseUrl(){
+	// Array of top level domains
+	const tld = ['.com', '.org', '.net', '.gov'];
+	const fullUrl = window.location.href;
+
+	// Search for first index of top level domains
+	let tldIndex = -1;
+	for(let elem of tld){
+		if(fullUrl.indexOf(elem) != -1) tldIndex = fullUrl.indexOf(elem);
+	}
+	
+	// Obtain url substring up to the top level domain
+	let baseUrl = "";
+	if(tldIndex != -1){
+		baseUrl = fullUrl.substring(0, tldIndex + 4);
+	}
+	return baseUrl;
+}
