@@ -36,3 +36,8 @@ window.addEventListener("load", function(){
 	console.log(window.location.href);
 	checkExtensionStatus();
 });
+
+
+var timerID = setInterval(function(){
+	checkExtensionStatus();
+}, 60 * 1000);
