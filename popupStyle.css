@@ -168,16 +168,25 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	height: 35px;
 	border-radius: 6px;
 	text-align: center;
+	box-shadow: 0 5px; #666;
 }
 .pause .btnRow .btn.pauseOnce{
 	margin-right: 20px;
+}
+.pause .btnRow .btn:hover{
+	background: #c4aead;
+}
+.pause .btnRow .btn:active{
+	background-color: #c4aead;
+	box-shadow: 0 3px #666;
+	transform: translateY(4px);
 }
 
 /*
   Active Time Style
 */
 .activeTime{
-	margin-top: 12px;
+	margin-top: 20px;
 }
 .activeTime .activeTimeTxt{
 	font-size: 20px;
@@ -186,6 +195,9 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	font-size: 15px;
 	margin-left: 10px;
 	border-radius: 6px;
+}
+.activeTime .setTimeBtn:hover{
+	background: #c4aead;
 }
 .activeTime input{
 	width: 125px;
