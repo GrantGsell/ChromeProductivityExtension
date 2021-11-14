@@ -152,7 +152,7 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 */
 .pause{
 	display: block;
-	margin-top: 60px;
+	margin-top: 45px;
 }
 .pause .btnRow{
 	display: inline;
@@ -195,14 +195,20 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	font-size: 15px;
 	margin-left: 10px;
 	border-radius: 6px;
+	box-shadow: 0 5px; #666;
 }
 .activeTime .setTimeBtn:hover{
 	background: #c4aead;
 }
+.activeTime .setTimeBtn:active{
+	background-color: #c4aead;
+	box-shadow: 0 3px #666;
+	transform: translateY(4px);
+}
 .activeTime input{
 	width: 125px;
 	height: 35px;
-	margin-top: 5px;
+	margin-top: 10px;
 	border-radius: 10px;
 }
 .activeTime .startTime{
