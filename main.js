@@ -2,6 +2,13 @@
 //const contents = document.getElementById('contents');
 //contents.parentNode.removeChild(contents);
 
+// HashTable to hold sites and elements
+const siteContentHT = new HashTable();
+
+
+// New reddit main page class => let contents = $('._31N0dvxfpsO6Ur5AKx4O5d');
+// Old reddit main page class => let contents = $('#siteTable');
+
 // jQuery code to simplify above JS code
 var contents = $('#contents');
 var parent = $('#contents').parentElement;
@@ -43,6 +50,7 @@ var timerID = setInterval(function(){
 	checkExtensionStatus();
 }, 60 * 1000);
 
+
 // Function for obtaining ull up to top-level domain, inclusive
 function getBaseUrl(){
 	// Array of top level domains
@@ -62,3 +70,7 @@ function getBaseUrl(){
 	}
 	return baseUrl;
 }
+
+window.addEventListener('locationchange', function(){
+    console.log('location changed!');
+})
