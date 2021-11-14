@@ -5,7 +5,7 @@
 	"description": "Eliminate internet distractions",
 	"content_scripts": [
 		{
-			"matches": ["https://www.youtube.com/*"],
+			"matches": ["https://www.youtube.com/*", "https://www.reddit.com/*"],
 			"js": ["jquery.min.js", "popupScripts.js", "main.js"]
 		}
 	],
