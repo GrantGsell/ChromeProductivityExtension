@@ -2,8 +2,11 @@
 //const contents = document.getElementById('contents');
 //contents.parentNode.removeChild(contents);
 
-// HashTable to hold sites and elements
-const siteContentHT = new HashTable();
+// Create object to hold site/element key
+const siteInfo = {
+	reddit: ['._31N0dvxfpsO6Ur5AKx4O5d', '#siteTable'],
+	youtube: ['#contents'],	
+};
 
 
 // New reddit main page class => let contents = $('._31N0dvxfpsO6Ur5AKx4O5d');
@@ -41,7 +44,14 @@ function checkExtensionStatus(evt){
 
 window.addEventListener("load", function(){
 	console.log(window.location.href);
-	console.log(getBaseUrl());
+	const currUrl = getBaseUrl();
+	console.log("Current Url: " + currUrl);
+	console.log(siteInfo[currUrl]);
+	if(currUrl in siteInfo){
+		const child  = siteInfo[currUrl][0];
+		setElements(child);
+		console.log("'" + contents + "'");
+	}
 	checkExtensionStatus();
 });
 
@@ -51,7 +61,7 @@ var timerID = setInterval(function(){
 }, 60 * 1000);
 
 
-// Function for obtaining ull up to top-level domain, inclusive
+// Function for obtaining url between subdomain and top-level domain
 function getBaseUrl(){
 	// Array of top level domains
 	const tld = ['.com', '.org', '.net', '.gov'];
@@ -66,7 +76,7 @@ function getBaseUrl(){
 	// Obtain url substring up to the top level domain
 	let baseUrl = "";
 	if(tldIndex != -1){
-		baseUrl = fullUrl.substring(0, tldIndex + 4);
+		baseUrl = fullUrl.substring(12, tldIndex);
 	}
 	return baseUrl;
 }
@@ -74,3 +84,9 @@ function getBaseUrl(){
 window.addEventListener('locationchange', function(){
     console.log('location changed!');
 })
+
+
+function setElements(child){
+	contents = $(child);
+	parent = $(child).parentElement;
+}
