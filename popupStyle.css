@@ -153,7 +153,7 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 */
 .pause{
 	display: block;
-	margin-top: 60px;
+	margin-top: 45px;
 }
 .pause .btnRow{
 	display: inline;
@@ -170,16 +170,25 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	border-radius: 6px;
 	text-align: center;
 	font-family: 'Ubuntu', sans-serif;
+	box-shadow: 0 5px; #666;
 }
 .pause .btnRow .btn.pauseOnce{
 	margin-right: 20px;
+}
+.pause .btnRow .btn:hover{
+	background: #c4aead;
+}
+.pause .btnRow .btn:active{
+	background-color: #c4aead;
+	box-shadow: 0 3px #666;
+	transform: translateY(4px);
 }
 
 /*
   Active Time Style
 */
 .activeTime{
-	margin-top: 12px;
+	margin-top: 20px;
 }
 .activeTime .activeTimeTxt{
 	font-size: 20px;
@@ -189,11 +198,20 @@ input:checked + .onOffSlider:after, input:checked + .darkmodeSlider:after{
 	font-size: 15px;
 	margin-left: 10px;
 	border-radius: 6px;
+	box-shadow: 0 5px; #666;
+}
+.activeTime .setTimeBtn:hover{
+	background: #c4aead;
+}
+.activeTime .setTimeBtn:active{
+	background-color: #c4aead;
+	box-shadow: 0 3px #666;
+	transform: translateY(4px);
 }
 .activeTime input{
 	width: 125px;
 	height: 35px;
-	margin-top: 5px;
+	margin-top: 10px;
 	border-radius: 10px;
 }
 .activeTime .startTime{
