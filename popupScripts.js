@@ -2,6 +2,7 @@
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
+chrome.runtime.getBackgroundPage(alwaysBtnPressed);
 
 
 function darkMode(){
@@ -55,7 +56,7 @@ function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
 	return elem.addEventListener('change', function(){
 		chrome.storage.local.set({'onOff': elem.checked}, function(){
-			//console.log("On Off Toggle: " + elem.checked);
+			// On Off has been set, do something
 		});
 	});
 }
@@ -75,8 +76,7 @@ function localMemGet(key){
 function localMemSet(key, value){
 	chrome.storage.local.set({[key] : value}, function(res){
 		if(!chrome.runtime.lastError){
-			// set storage value successfully.
-			console.log("SET");
+			// Set storage value successfully
 		}
 	});
 }
@@ -90,7 +90,6 @@ function setActiveTime(){
 	// Time difference:
 	let datePadding = new Date();
 	let currDate = datePadding.toString().slice(0,16);
-	console.log(currDate);
 	const diff = Date.parse(currDate + timeEnd) - Date.parse(currDate + timeStart);
 	
 	// Ensure both times are valid
@@ -146,6 +145,15 @@ function errorText(errMsg, isError){
 		}, 1000);
 	}
 }
+
+
+/*
+ * If always button pressed, set the local memory value to true
+ */
+function alwaysBtnPressed(){
+	const setBtn = eventBtnClick('btnAlways', localMemSet('always', true));
+}
+
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
