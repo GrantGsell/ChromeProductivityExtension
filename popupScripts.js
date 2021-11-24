@@ -151,7 +151,18 @@ function errorText(errMsg, isError){
  * If always button pressed, set the local memory value to true
  */
 function alwaysBtnPressed(){
-	const setBtn = eventBtnClick('btnAlways', localMemSet('always', true));
+	const setBtn = eventBtnClick('alwaysBtn', setAlways);
+}
+let val = true;
+function setAlways(){
+	val = !val;
+	chrome.storage.local.set({['always'] : (val)}, function(res){
+		if(!chrome.runtime.lastError){
+			// Set storage value successfully
+			console.log("HERE: Popup");
+			console.log(val);
+		}
+	});
 }
 
 
