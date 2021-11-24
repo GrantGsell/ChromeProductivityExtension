@@ -24,22 +24,25 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			`Old value was "${oldValue}", new value is "${newValue}".`
 		);
 		checkExtensionStatus();
+		alwaysButtonEvent();
 	}
 });
 
 function checkExtensionStatus(evt){
-	chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
-		var currTime = new Date().toString();
-		var currDate = currTime.slice(0,16);
-		var time0 = Date.parse(currDate + res.timeStart);
-		var time1 = Date.parse(currDate + res.timeEnd);
-		var newTime = Date.parse(currTime);
-		if(res.onOff && (time0 <= newTime && newTime <= time1)){
-			contents.hide("fast");
-		}else{
-			contents.show("fast");
-		}
-	});
+	if(siteInfo[getBaseUrl()] != null) {
+		chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
+			var currTime = new Date().toString();
+			var currDate = currTime.slice(0,16);
+			var time0 = Date.parse(currDate + res.timeStart);
+			var time1 = Date.parse(currDate + res.timeEnd);
+			var newTime = Date.parse(currTime);
+			if(res.onOff && (time0 <= newTime && newTime <= time1)){
+				contents.hide("fast");
+			}else{
+				contents.show("fast");
+			}
+		});
+	}
 }
 
 window.addEventListener("load", function(){
@@ -89,4 +92,34 @@ window.addEventListener('locationchange', function(){
 function setElements(child){
 	contents = $(child);
 	parent = $(child).parentElement;
+}
+
+
+/*
+ * Check for change in always local memory variable 
+ */
+function alwaysButtonEvent(){
+	chrome.storage.local.get(['always'], function(res){
+		try{
+			console.log("HERE: MAIN");
+			console.log(res.always);
+		}
+		catch{
+			console.log("Error");
+		}
+		let isTrue = res.always;
+		if(isTrue){
+			contents.show();
+			try{
+				let url = getBaseUrl();
+				console.log(url);
+				delete siteInfo.youtube;
+				console.log(siteInfo);
+			}
+			catch(e){
+				logMyErrors(e);
+			}
+		}
+	});
+	
 }
