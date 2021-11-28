@@ -3,14 +3,14 @@
 //contents.parentNode.removeChild(contents);
 
 // Create object to hold site/element key
-const siteInfo = {
+var siteInfo = {
 	reddit: ['._31N0dvxfpsO6Ur5AKx4O5d', '#siteTable'],
 	youtube: ['#contents'],	
 };
 
 
 // New reddit main page class => let contents = $('._31N0dvxfpsO6Ur5AKx4O5d');
-// Old reddit main page class => let contents = $('#siteTable');
+// Old reddit Main page class => let contents = $('#siteTable');
 
 // jQuery code to simplify above JS code
 var contents = $('#contents');
@@ -23,13 +23,16 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			`Storage key "${key}" in namespace "${namespace}" changed.`,
 			`Old value was "${oldValue}", new value is "${newValue}".`
 		);
-		checkExtensionStatus();
 		alwaysButtonEvent();
+		checkExtensionStatus();
+		console.log(getSiteObject());
+		console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
+		//alwaysButtonEvent();
 	}
 });
 
 function checkExtensionStatus(evt){
-	if(siteInfo[getBaseUrl()] != null) {
+	if((getSiteObject())[getBaseUrl()] != null) {
 		chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
 			var currTime = new Date().toString();
 			var currDate = currTime.slice(0,16);
@@ -46,14 +49,10 @@ function checkExtensionStatus(evt){
 }
 
 window.addEventListener("load", function(){
-	console.log(window.location.href);
 	const currUrl = getBaseUrl();
-	console.log("Current Url: " + currUrl);
-	console.log(siteInfo[currUrl]);
-	if(currUrl in siteInfo){
+	if(currUrl in getSiteObject()){
 		const child  = siteInfo[currUrl][0];
 		setElements(child);
-		console.log("'" + contents + "'");
 	}
 	checkExtensionStatus();
 });
@@ -101,20 +100,25 @@ function setElements(child){
 function alwaysButtonEvent(){
 	chrome.storage.local.get(['always'], function(res){
 		try{
-			console.log("HERE: MAIN");
-			console.log(res.always);
+			//console.log("HERE: MAIN");
+			//console.log(res.always);
 		}
 		catch{
 			console.log("Error");
 		}
 		let isTrue = res.always;
 		if(isTrue){
-			contents.show();
+			//contents.show();
 			try{
-				let url = getBaseUrl();
-				console.log(url);
-				delete siteInfo.youtube;
-				console.log(siteInfo);
+				delete siteData.youtube;
+				console.log(siteData);
+				setSiteObject(siteData);
+				chrome.storage.local.set({['always'] : false}, function(res){
+					if(!chrome.runtime.lastError){
+						// Set storage value successfully
+					}
+				});
+				
 			}
 			catch(e){
 				logMyErrors(e);
@@ -122,4 +126,22 @@ function alwaysButtonEvent(){
 		}
 	});
 	
+}
+
+let siteData = {}
+function getSiteObject(){
+	chrome.storage.local.get(['siteData'], function(res){
+		siteData = res.siteData;
+		//console.log(siteData);
+	});
+	return siteData;
+}
+
+
+function setSiteObject(data){
+	chrome.storage.local.set({['siteData'] : data}, function(res){
+		if(!chrome.runtime.lastError){
+			// Set storage value successfully
+		}
+	});
 }
