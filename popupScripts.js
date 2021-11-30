@@ -3,6 +3,7 @@ chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
 chrome.runtime.getBackgroundPage(alwaysBtnPressed);
+chrome.runtime.getBackgroundPage(onceBtnPressed);
 
 
 function darkMode(){
@@ -74,11 +75,11 @@ function localMemGet(key){
 
 
 function localMemSet(key, value){
-	chrome.storage.local.set({[key] : value}, function(res){
+	 chrome.storage.local.set({[key] : value}, function(res){
 		if(!chrome.runtime.lastError){
 			// Set storage value successfully
 		}
-	});
+	 });
 }
 
 
@@ -160,6 +161,24 @@ function setAlways(){
 		if(!chrome.runtime.lastError){
 			// Set storage value successfully
 			console.log("HERE: Popup");
+			console.log(val);
+		}
+	});
+}
+
+/*
+ * Once button clicked functionality
+ */
+function onceBtnPressed(){
+	const setOnce = eventBtnClick('onceBtn', setOnce);
+}
+let valOnce = true;
+function setOnce(){
+	valOnce = !valOnce;
+	chrome.storage.local.set({['once'] : (valOnce)}, function(res){
+		if(!chrome.runtime.lastError){
+			// Set storage value successfully
+			console.log("HERE: Popup, Once set");
 			console.log(val);
 		}
 	});
