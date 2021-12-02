@@ -24,6 +24,7 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			`Old value was "${oldValue}", new value is "${newValue}".`
 		);
 		alwaysButtonEvent();
+		onceBtnEvent();
 		checkExtensionStatus();
 		console.log(getSiteObject());
 		console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
@@ -108,7 +109,7 @@ function alwaysButtonEvent(){
 		}
 		let isTrue = res.always;
 		if(isTrue){
-			//contents.show();
+			contents.show();
 			try{
 				delete siteData.youtube;
 				console.log(siteData);
@@ -145,3 +146,38 @@ function setSiteObject(data){
 		}
 	});
 }
+
+
+function onceBtnEvent(){
+	console.log("Made it to Once Btn Event");
+	chrome.storage.local.get(['once'], function(res){
+		let isTrue = res.once;
+		if(isTrue){
+			contents.show();
+			try{
+				chrome.storage.local.set({['once'] : false}, function(res){
+					if(!chrome.runtime.lastError){
+						// Set storage value successfully
+					}
+				});
+				
+			}
+			catch(e){
+				logMyErrors(e);
+			}
+		}
+	});
+}
+
+
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if(request) {
+        if (request.msg == "Once Btn Pressed") {
+            // do cool things with the request then send response 
+            // ...
+			console.log("Message Recieved!!!!!!");
+            sendResponse({ data: true }); // This response is sent to the message's sender, here the background script 
+        }
+    }
+});
