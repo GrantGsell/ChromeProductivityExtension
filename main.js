@@ -23,12 +23,9 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 			`Storage key "${key}" in namespace "${namespace}" changed.`,
 			`Old value was "${oldValue}", new value is "${newValue}".`
 		);
-		alwaysButtonEvent();
-		onceBtnEvent();
 		checkExtensionStatus();
 		console.log(getSiteObject());
 		console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
-		//alwaysButtonEvent();
 	}
 });
 
@@ -95,40 +92,6 @@ function setElements(child){
 }
 
 
-/*
- * Check for change in always local memory variable 
- */
-function alwaysButtonEvent(){
-	chrome.storage.local.get(['always'], function(res){
-		try{
-			//console.log("HERE: MAIN");
-			//console.log(res.always);
-		}
-		catch{
-			console.log("Error");
-		}
-		let isTrue = res.always;
-		if(isTrue){
-			contents.show();
-			try{
-				delete siteData.youtube;
-				console.log(siteData);
-				setSiteObject(siteData);
-				chrome.storage.local.set({['always'] : false}, function(res){
-					if(!chrome.runtime.lastError){
-						// Set storage value successfully
-					}
-				});
-				
-			}
-			catch(e){
-				logMyErrors(e);
-			}
-		}
-	});
-	
-}
-
 let siteData = {}
 function getSiteObject(){
 	chrome.storage.local.get(['siteData'], function(res){
@@ -158,6 +121,15 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse({ data: true }); // This response is sent to the message's sender, here the background script 
         }
 		else if(request.msg == "Always Btn Pressed"){
+			contents.show();
+			try{
+				delete siteData.youtube;
+				console.log(siteData);
+				setSiteObject(siteData);
+			}
+			catch(e){
+				logMyErrors(e);
+			}
 			console.log("Always Button was Pressed!!!!");
 			sendResponse({ data: true });
 		}

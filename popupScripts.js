@@ -154,17 +154,11 @@ function errorText(errMsg, isError){
 function alwaysBtnPressed(){
 	const setBtn = eventBtnClick('alwaysBtn', setAlways);
 }
-let val = true;
+
 function setAlways(){
-	val = !val;
-	chrome.storage.local.set({['always'] : (val)}, function(res){
-		if(!chrome.runtime.lastError){
-			// Set storage value successfully
-			console.log("HERE: Popup");
-			console.log(val);
-		}
-	});
+	sendMessage("Always Btn Pressed", true);
 }
+
 
 /*
  * Once button clicked functionality
