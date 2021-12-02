@@ -148,29 +148,6 @@ function setSiteObject(data){
 }
 
 
-function onceBtnEvent(){
-	console.log("Made it to Once Btn Event");
-	chrome.storage.local.get(['once'], function(res){
-		let isTrue = res.once;
-		if(isTrue){
-			contents.show();
-			try{
-				chrome.storage.local.set({['once'] : false}, function(res){
-					if(!chrome.runtime.lastError){
-						// Set storage value successfully
-					}
-				});
-				
-			}
-			catch(e){
-				logMyErrors(e);
-			}
-		}
-	});
-}
-
-
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request) {
         if (request.msg == "Once Btn Pressed") {
@@ -180,5 +157,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			console.log("Message Recieved!!!!!!");
             sendResponse({ data: true }); // This response is sent to the message's sender, here the background script 
         }
+		else if(request.msg == "Always Btn Pressed"){
+			console.log("Always Button was Pressed!!!!");
+			sendResponse({ data: true });
+		}
     }
 });
