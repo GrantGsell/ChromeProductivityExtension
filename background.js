@@ -70,6 +70,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 				});
 			});
         }
+		else if(request.msg == "Always Btn Pressed"){
+			console.log("Always Message Recieved");
+			
+			chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+				// relay finder.js's message to filler.js
+				chrome.tabs.sendMessage(tabs[0].id, request, (response) => {
+					if (response) {
+						if (response.data) {
+							// relay filler.js's response to finder.js
+							sendResponse({ data: response.data });
+						}
+					}
+				});
+			});
+			
+		}
     }
 	return true;
 });
