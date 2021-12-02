@@ -173,18 +173,14 @@ function onceBtnPressed(){
 	const setOnceFlag = eventBtnClick('onceBtn', setOnce);
 	
 }
-let valOnce = true;
-function setOnce(){
-	valOnce = !valOnce;
-	chrome.storage.local.set({['once'] : (valOnce)}, function(res){
-		if(!chrome.runtime.lastError){
-			// Set storage value successfully
-			console.log("HERE: Popup, Once set");
-			console.log(val);
-		}
-	});
 
-	chrome.runtime.sendMessage({ msg: "Once Btn Pressed", data: true }, (response) => {
+function setOnce(){
+	sendMessage("Once Btn Pressed", true);
+}
+
+
+function sendMessage(message, msgData){
+	chrome.runtime.sendMessage({ msg: message, data: msgData}, (response) => {
 		// If this message's recipient sends a response it will be handled here 
 		if (response) {
 			console.log("RESPONSE!!!!!!");
@@ -192,8 +188,6 @@ function setOnce(){
 			// ...
 		}
 	});
-
-
 }
 
 

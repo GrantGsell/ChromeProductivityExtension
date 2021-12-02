@@ -174,6 +174,7 @@ function onceBtnEvent(){
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request) {
         if (request.msg == "Once Btn Pressed") {
+			contents.show();
             // do cool things with the request then send response 
             // ...
 			console.log("Message Recieved!!!!!!");
