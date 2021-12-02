@@ -50,3 +50,14 @@ function setSiteData(){
 		}
 	});	
 }
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if(request) {
+        if (request.msg == "Once Btn Pressed") {
+            // do cool things with the request then send response
+            // ...
+            sendResponse({ sender: "background.js", data: true  }); // This response is sent to the message's sender
+			console.log("Message Recieved");
+        }
+    }
+});

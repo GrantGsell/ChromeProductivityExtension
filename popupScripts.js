@@ -1,4 +1,4 @@
- 'use strict';
+ 'use. strict';
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
@@ -170,7 +170,8 @@ function setAlways(){
  * Once button clicked functionality
  */
 function onceBtnPressed(){
-	const setOnce = eventBtnClick('onceBtn', setOnce);
+	const setOnceFlag = eventBtnClick('onceBtn', setOnce);
+	
 }
 let valOnce = true;
 function setOnce(){
@@ -182,7 +183,19 @@ function setOnce(){
 			console.log(val);
 		}
 	});
+
+	chrome.runtime.sendMessage({ msg: "Once Btn Pressed", data: true }, (response) => {
+		// If this message's recipient sends a response it will be handled here 
+		if (response) {
+			console.log("RESPONSE!!!!!!");
+			// do cool things with the response
+			// ...
+		}
+	});
+
+
 }
+
 
 
 function changeTheme(themeFlag){
