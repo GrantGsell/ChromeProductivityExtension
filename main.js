@@ -30,7 +30,10 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 
 function checkExtensionStatus(evt){
-	if((getSiteObject())[getBaseUrl()] != null) {
+	var temp = getSiteObject(getBaseUrl());
+	console.log(temp);
+	if(getSiteObject(getBaseUrl())) {
+		console.log("Made it to initial check 2");
 		chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
 			var currTime = new Date().toString();
 			var currDate = currTime.slice(0,16);
@@ -48,7 +51,7 @@ function checkExtensionStatus(evt){
 
 window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
-	if(currUrl in getSiteObject()){
+	if(getSiteObject(currUrl)){
 		const child  = siteInfo[currUrl][0];
 		setElements(child);
 	}
@@ -92,13 +95,21 @@ function setElements(child){
 }
 
 
-let siteData = {}
-function getSiteObject(){
-	chrome.storage.local.get(['siteData'], function(res){
-		siteData = res.siteData;
-		//console.log(siteData);
+
+function getSiteObject(url){
+	var site = {
+		data: null
+	};
+	let result = false;
+	chrome.storage.sync.get(['siteData'], function(res){
+		site.data = res.siteData;
+		console.log(site.data);
+		if(url in site.data){
+			console.log("ITS TRUE");
+			result = true;
+		}
 	});
-	return siteData;
+	return true;
 }
 
 
