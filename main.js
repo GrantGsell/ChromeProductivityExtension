@@ -25,31 +25,37 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 	//	);
 		checkExtensionStatus();
 		//console.log(getSiteObject());
-		console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
+		//console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
 	}
 });
 
 function checkExtensionStatus(evt){
-	if(getSiteObject(getBaseUrl())) {
-		console.log("Made it to initial check 2");
-		chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
-			var currTime = new Date().toString();
-			var currDate = currTime.slice(0,16);
-			var time0 = Date.parse(currDate + res.timeStart);
-			var time1 = Date.parse(currDate + res.timeEnd);
-			var newTime = Date.parse(currTime);
-			if(res.onOff && (time0 <= newTime && newTime <= time1)){
-				contents.hide("fast");
-			}else{
-				contents.show("fast");
-			}
-		});
-	}
+	chrome.storage.sync.get(['siteData'], function(res){
+		var siteObj = res.siteData;
+		if(getBaseUrl() in siteObj){
+			console.log("Made it to initial check 2");
+			chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
+				var currTime = new Date().toString();
+				var currDate = currTime.slice(0,16);
+				var time0 = Date.parse(currDate + res.timeStart);
+				var time1 = Date.parse(currDate + res.timeEnd);
+				var newTime = Date.parse(currTime);
+				if(res.onOff && (time0 <= newTime && newTime <= time1)){
+					contents.hide("fast");
+				}else{
+					contents.show("fast");
+				}
+			});
+		}else{
+			console.log("");
+		}
+	});
 }
 
 window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
 	if(getSiteObject(currUrl)){
+		console.log("Made it to the INNER Load area");
 		const child  = siteInfo[currUrl][0];
 		setElements(child);
 	}
@@ -101,10 +107,9 @@ function getSiteObject(url){
 	//let result = false;
 	chrome.storage.sync.get(['siteData'], function(res){
 		site.data = res.siteData;
-		console.log("Site Data: " + site.data);
-		console.log("URL      : " + url);
 		if(url in site.data){
 			result = true;
+			console.log("Result is True");
 		}else{
 			result = false;
 		}
@@ -122,10 +127,10 @@ function setSiteObject(){
 	chrome.storage.sync.get(['siteData'], function(res){
 		site.data = res.siteData;
 		delete site.data.youtube;
-		console.log("Site Data After Deletion: " + site.data);
-		
+		//console.log("Site Data After Deletion: " + site.data);
 		chrome.storage.sync.set({['siteData'] : site.data}, function(res){
 			if(!chrome.runtime.lastError){
+				console.log("Made it to Storage");
 				// Set storage value successfully
 			}
 		});
