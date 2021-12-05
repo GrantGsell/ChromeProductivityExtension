@@ -1,7 +1,9 @@
- 'use strict';
+ 'use. strict';
 chrome.runtime.getBackgroundPage(darkMode);
 chrome.runtime.getBackgroundPage(extensionOnOff);
 chrome.runtime.getBackgroundPage(setBtnEvent);
+chrome.runtime.getBackgroundPage(alwaysBtnPressed);
+chrome.runtime.getBackgroundPage(onceBtnPressed);
 
 
 function darkMode(){
@@ -55,7 +57,7 @@ function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
 	return elem.addEventListener('change', function(){
 		chrome.storage.local.set({'onOff': elem.checked}, function(){
-			//console.log("On Off Toggle: " + elem.checked);
+			// On Off has been set, do something
 		});
 	});
 }
@@ -73,12 +75,11 @@ function localMemGet(key){
 
 
 function localMemSet(key, value){
-	chrome.storage.local.set({[key] : value}, function(res){
+	 chrome.storage.local.set({[key] : value}, function(res){
 		if(!chrome.runtime.lastError){
-			// set storage value successfully.
-			console.log("SET");
+			// Set storage value successfully
 		}
-	});
+	 });
 }
 
 
@@ -90,7 +91,6 @@ function setActiveTime(){
 	// Time difference:
 	let datePadding = new Date();
 	let currDate = datePadding.toString().slice(0,16);
-	console.log(currDate);
 	const diff = Date.parse(currDate + timeEnd) - Date.parse(currDate + timeStart);
 	
 	// Ensure both times are valid
@@ -146,6 +146,45 @@ function errorText(errMsg, isError){
 		}, 1000);
 	}
 }
+
+
+/*
+ * If always button pressed, set the local memory value to true
+ */
+function alwaysBtnPressed(){
+	const setBtn = eventBtnClick('alwaysBtn', setAlways);
+}
+
+function setAlways(){
+	sendMessage("Always Btn Pressed", true);
+}
+
+
+/*
+ * Once button clicked functionality
+ */
+function onceBtnPressed(){
+	const setOnceFlag = eventBtnClick('onceBtn', setOnce);
+	
+}
+
+function setOnce(){
+	sendMessage("Once Btn Pressed", true);
+}
+
+
+function sendMessage(message, msgData){
+	chrome.runtime.sendMessage({ msg: message, data: msgData}, (response) => {
+		// If this message's recipient sends a response it will be handled here 
+		if (response) {
+			console.log("RESPONSE!!!!!!");
+			// do cool things with the response
+			// ...
+		}
+	});
+}
+
+
 
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
