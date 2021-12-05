@@ -19,19 +19,17 @@ var parent = $('#contents').parentElement;
 
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-		console.log(
-			`Storage key "${key}" in namespace "${namespace}" changed.`,
-			`Old value was "${oldValue}", new value is "${newValue}".`
-		);
+		//console.log(
+		//	`Storage key "${key}" in namespace "${namespace}" changed.`,
+		//	`Old value was "${oldValue}", new value is "${newValue}".`
+	//	);
 		checkExtensionStatus();
-		console.log(getSiteObject());
+		//console.log(getSiteObject());
 		console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
 	}
 });
 
 function checkExtensionStatus(evt){
-	var temp = getSiteObject(getBaseUrl());
-	console.log(temp);
 	if(getSiteObject(getBaseUrl())) {
 		console.log("Made it to initial check 2");
 		chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
@@ -95,30 +93,51 @@ function setElements(child){
 }
 
 
-
+let result = false;
 function getSiteObject(url){
+	var site = {
+		data: null
+	};
+	//let result = false;
+	chrome.storage.sync.get(['siteData'], function(res){
+		site.data = res.siteData;
+		console.log("Site Data: " + site.data);
+		console.log("URL      : " + url);
+		if(url in site.data){
+			result = true;
+		}else{
+			result = false;
+		}
+	});
+	//console.log("Result: " + result);
+	return result;
+}
+
+
+function setSiteObject(){
 	var site = {
 		data: null
 	};
 	let result = false;
 	chrome.storage.sync.get(['siteData'], function(res){
 		site.data = res.siteData;
-		console.log(site.data);
-		if(url in site.data){
-			console.log("ITS TRUE");
-			result = true;
-		}
+		delete site.data.youtube;
+		console.log("Site Data After Deletion: " + site.data);
+		
+		chrome.storage.sync.set({['siteData'] : site.data}, function(res){
+			if(!chrome.runtime.lastError){
+				// Set storage value successfully
+			}
+		});
+		
 	});
-	return true;
-}
-
-
-function setSiteObject(data){
-	chrome.storage.local.set({['siteData'] : data}, function(res){
-		if(!chrome.runtime.lastError){
-			// Set storage value successfully
-		}
+	/*
+	chrome.storage.sync.set({['siteData'] : site.data}, function(res){
+			if(!chrome.runtime.lastError){
+				// Set storage value successfully
+			}
 	});
+	*/
 }
 
 
@@ -134,12 +153,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		else if(request.msg == "Always Btn Pressed"){
 			contents.show();
 			try{
-				delete siteData.youtube;
-				console.log(siteData);
-				setSiteObject(siteData);
+				//delete siteData.youtube;
+				//console.log(siteData);
+				setSiteObject();
 			}
 			catch(e){
-				logMyErrors(e);
+				console.log(e);
 			}
 			console.log("Always Button was Pressed!!!!");
 			sendResponse({ data: true });
