@@ -29,7 +29,6 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 
 function checkExtensionStatus(evt){
 	chrome.storage.sync.get(['siteData'], function(res){
-		var siteObj = res.siteData;
 		if(getBaseUrl() in res.siteData){
 			chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
 				var currTime = new Date().toString();
@@ -51,10 +50,12 @@ function checkExtensionStatus(evt){
 
 window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
-	if(getSiteObject(currUrl)){
-		const child  = siteInfo[currUrl][0];
-		setElements(child);
-	}
+	chrome.storage.sync.get(['siteData'], function(res){
+		if(getBaseUrl() in res.siteData){
+			const child  = siteInfo[currUrl][0];
+			setElements(child);
+		}
+	});
 	checkExtensionStatus();
 });
 
@@ -122,7 +123,8 @@ function setSiteObject(){
 	let result = false;
 	chrome.storage.sync.get(['siteData'], function(res){
 		site.data = res.siteData;
-		delete site.data.youtube;
+		//delete site.data.youtube;
+		delete site.data[getBaseUrl()];
 		//console.log("Site Data After Deletion: " + site.data);
 		chrome.storage.sync.set({['siteData'] : site.data}, function(res){
 			if(!chrome.runtime.lastError){
