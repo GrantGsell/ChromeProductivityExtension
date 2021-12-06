@@ -24,16 +24,13 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 		//	`Old value was "${oldValue}", new value is "${newValue}".`
 	//	);
 		checkExtensionStatus();
-		//console.log(getSiteObject());
-		//console.log("URL is in sites Object: " + (getBaseUrl() in siteInfo));
 	}
 });
 
 function checkExtensionStatus(evt){
 	chrome.storage.sync.get(['siteData'], function(res){
 		var siteObj = res.siteData;
-		if(getBaseUrl() in siteObj){
-			console.log("Made it to initial check 2");
+		if(getBaseUrl() in res.siteData){
 			chrome.storage.local.get(['onOff', 'timeStart', 'timeEnd'], function(res){
 				var currTime = new Date().toString();
 				var currDate = currTime.slice(0,16);
@@ -55,7 +52,6 @@ function checkExtensionStatus(evt){
 window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
 	if(getSiteObject(currUrl)){
-		console.log("Made it to the INNER Load area");
 		const child  = siteInfo[currUrl][0];
 		setElements(child);
 	}
