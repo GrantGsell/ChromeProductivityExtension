@@ -94,34 +94,3 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 	return true;
 });
-
-/*
-chrome.alarms.onAlarm.addListener((alarm) => {
-  console.log(alarm.name); // refresh
-  helloWorld();
-});
-
-
-function helloWorld() {
-  console.log("Hello, world!");
-}
-
-
-chrome.runtime.onInstalled.addListener(() => {
-	console.log("Background HERE");
-});
-
-
-const filter = {
-  url: [
-    {
-      urlMatches: 'https://www.google.com/',
-    },
-  ],
-};
-
-
-chrome.webNavigation.onCompleted.addListener(() => {
-  console.info("The user has loaded my favorite website!");
-}, filter);
-*/

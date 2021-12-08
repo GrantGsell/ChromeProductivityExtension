@@ -6,17 +6,41 @@ chrome.runtime.getBackgroundPage(alwaysBtnPressed);
 chrome.runtime.getBackgroundPage(onceBtnPressed);
 
 
+/*
+ * Name       : darkMode
+ * Purpose    : Creates a closure that monitors the dark mode toggle switch.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function darkMode(){
 	const temp = 'test'
 	const dmFlag = toggleChange(temp, changeTheme);
 }
 
 
+/*
+ * Name       : extensionOnOff
+ * Purpose    : Creates a closure that monitors the on/off toggle switch.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function extensionOnOff(){
 	const onOffFlag = turnExtensionOnOff();
 }
 
 
+/*
+ * Name       : toggleChange
+ * Purpose    : Activates the functional components for the darkmode switch.
+ * Parameters : 
+ *              elemId, the html id for the darkmode switch.
+ *              callback, a function to be executed when the darkmode toggle 
+ *                switch changes state.
+ * Returns    : A closure encompasing the darkmode functional components.
+ * Notes      : None.
+ */
 function toggleChange(elemId, callback){
 	const elem = document.getElementById(elemId);
 	
@@ -31,20 +55,24 @@ function toggleChange(elemId, callback){
 }
 
 
+/*
+ * Name       : None.
+ * Purpose    : Set the dynamic elements of the popup when its opened.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : Both toggle switches and time elements are affected.
+ */
 window.onload = function(){
-	const t0 = 'test';
-	const t1 = 'onOff';
-
 	// Read Darkmode Toggle Switch Local Data
 	chrome.storage.local.get(['test'], function(res){
-		const toggleElem = document.getElementById(t0);
+		const toggleElem = document.getElementById('test');
 		toggleElem.checked = res.test;
 		changeTheme(res.test);
 	});
 
 	// Read onOff Toggle Switch Local Data
 	chrome.storage.local.get(['onOff'], function(res){
-		const toggleOnOff = document.getElementById(t1);
+		const toggleOnOff = document.getElementById('onOff');
 		toggleOnOff.checked = res.onOff;
 	});
 
@@ -53,6 +81,14 @@ window.onload = function(){
 }
 
 
+/*
+ * Name       : turnExtensionOnOff
+ * Purpose    : To monitor the on/off toggle switch, and activate/deactivate 
+ *                the extensions functionality accordingly.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
 	return elem.addEventListener('change', function(){
@@ -63,17 +99,15 @@ function turnExtensionOnOff(){
 }
 
 
-function localMemGet(key){
-	let value;
-	chrome.storage.local.get([key], function(res){
-		let entriesArray = Object.entries(res);
-		let key = entriesArray[0][0];
-		value = entriesArray[0][1];
-		return value;
-	});
-}
-
-
+/*
+ * Name       : localMemSet
+ * Purpose    : Sets the given inputs in local memory.
+ * Parameters : 
+ *              key, the key for the given data.
+ *              value, the data for the associtated key.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function localMemSet(key, value){
 	 chrome.storage.local.set({[key] : value}, function(res){
 		if(!chrome.runtime.lastError){
@@ -83,6 +117,15 @@ function localMemSet(key, value){
 }
 
 
+/*
+ * Name       : setActiveTime
+ * Purpose    : Obtains the start and end time that the user has provided, 
+ *                and stores the values in memory.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : If the times inputted by the user are invalid an error 
+ *                message will be displayed on the popup.
+ */
 function setActiveTime(){	
 	// Obtain start and end time
 	let timeStart = document.getElementById("startTime").value;
@@ -109,6 +152,14 @@ function setActiveTime(){
 }
 
 
+/*
+ * Name       : getActiveTime
+ * Purpose    : Obtains the values stored for the time that the extension is
+ *                active and sets the html elements accordingly.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function getActiveTime(){
 	let timeStart;
 	let timeEnd;
@@ -121,10 +172,28 @@ function getActiveTime(){
 }
 
 
+/*
+ * Name       : setBtnEvent
+ * Purpose    : Creates a closure for when the set button is clicked.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function setBtnEvent(){
 	const setBtn = eventBtnClick('setBtn', setActiveTime);
 }
 
+/*
+ * Name       : eventBtnClick
+ * Purpose    : Checks to see if a html button is pressed, and executes a 
+ *                callback funciton if true.
+ * Parameters : 
+ *              btnId, a string denoting the html id for a button.
+ *              callback, a function to be executed if the given button was 
+ *                pressed.
+ * Returns    : A closure encompasing a listener for the given button.
+ * Notes      : None.
+ */
 function eventBtnClick(btnId, callback){
 	const elem = document.getElementById(btnId);
 	return elem.addEventListener('click', function(){
@@ -133,6 +202,18 @@ function eventBtnClick(btnId, callback){
 }
 
 
+/*
+ * Name       : errorText
+ * Purpose    : Displays text when the time input by the user is invalid, or 
+ *                to remove error text if the user sets a valid time after an 
+ *                invalid one.
+ * Parameters :
+ *              errMsg, a string denoting the error message to display.
+ *              isError, a boolean denoting if the current user input is 
+ *                valid.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function errorText(errMsg, isError){
 	// Error message element
 	const errElem = document.getElementById('errorText');
@@ -149,43 +230,86 @@ function errorText(errMsg, isError){
 
 
 /*
- * If always button pressed, set the local memory value to true
+ * Name       : alwaysBtnPressed
+ * Purpose    : To register that the always button was pressed and call its
+ *                coressponding callback function.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
  */
 function alwaysBtnPressed(){
-	const setBtn = eventBtnClick('alwaysBtn', setAlways);
+	const setBtn = eventBtnClick('alwaysBtn', activateAlways);
 }
 
-function setAlways(){
+
+/*
+ * Name       : activateAlways
+ * Purpose    : To act as a callback function for when the always button is 
+ *                pressed by the user.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
+function activateAlways(){
 	sendMessage("Always Btn Pressed", true);
 }
 
 
 /*
- * Once button clicked functionality
+ * Name       : onceBtnPressed
+ * Purpose    : To register that the once button was pressed and call its
+ *                coressponding callback function.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
  */
 function onceBtnPressed(){
-	const setOnceFlag = eventBtnClick('onceBtn', setOnce);
+	const setOnceFlag = eventBtnClick('onceBtn', activateOnce);
 	
 }
 
-function setOnce(){
+
+/*
+ * Name       : activateOnce
+ * Purpose    : To act as a callback function for when the once button is 
+ *                pressed by the user.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : None.
+ */
+function activateOnce(){
 	sendMessage("Once Btn Pressed", true);
 }
 
 
+/*
+ * Name       : sendMessage
+ * Purpose    : Facilitates sending messages from this script to the main 
+ *                script via the background script, which acts as an 
+ *                intermediary.
+ * Parameters :
+ *              message, a string denoting the message to be passed.
+ *              msgData, an object denoting the data to be passed.
+ * Returns    : None.
+ * Notes      : None.
+ */
 function sendMessage(message, msgData){
 	chrome.runtime.sendMessage({ msg: message, data: msgData}, (response) => {
-		// If this message's recipient sends a response it will be handled here 
 		if (response) {
-			console.log("RESPONSE!!!!!!");
-			// do cool things with the response
-			// ...
+			console.log("Message successful");
 		}
 	});
 }
 
 
-
+/*
+ * Name       : changeTheme
+ * Purpose    : To change the color of each element within the popup.
+ * Parameters : themeFlag, a boolean denoting if the theme should be in
+ *                darkmode (true) or lightmode (false).
+ * Returns    : None.
+ * Notes      : None.
+ */
 function changeTheme(themeFlag){
 	const element = document.querySelector('body');
 	const style = getComputedStyle(element);

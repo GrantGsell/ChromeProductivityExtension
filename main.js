@@ -1,16 +1,9 @@
-// JavaScript
-//const contents = document.getElementById('contents');
-//contents.parentNode.removeChild(contents);
-
 // Create object to hold site/element key
 var siteInfo = {
 	reddit: ['._31N0dvxfpsO6Ur5AKx4O5d', '#siteTable'],
 	youtube: ['#contents'],	
 };
 
-
-// New reddit main page class => let contents = $('._31N0dvxfpsO6Ur5AKx4O5d');
-// Old reddit Main page class => let contents = $('#siteTable');
 
 // jQuery code to simplify above JS code
 var contents = $('#contents');
@@ -23,7 +16,7 @@ var parent = $('#contents').parentElement;
  *                storage values is changed.
  * Parameters : None.
  * Returns    : None.
- * Notes      : Consider moving this to the background page.
+ * Notes      : None.
  */
 chrome.storage.onChanged.addListener(function (changes, namespace) {
 	for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
@@ -75,7 +68,6 @@ function checkExtensionStatus(){
  * Returns    : None.
  * Notes      : If the current webpage is not a key in the siteInfo object 
  *                nothing occurs.
- *              Consider moving this to the background page.
  */
 window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
@@ -96,7 +88,7 @@ window.addEventListener("load", function(){
  *                the current time is outside of the active time block set by  *                the user.
  * Parameters : None.
  * Returns    : None.
- * Notes      : Consider moving this to the background page.
+ * Notes      : None.
  */
 var timerID = setInterval(function(){
 	checkExtensionStatus();
