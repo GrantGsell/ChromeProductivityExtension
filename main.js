@@ -1,10 +1,3 @@
-// Create object to hold site/element key
-var siteInfo = {
-	reddit: ['._31N0dvxfpsO6Ur5AKx4O5d', '#siteTable'],
-	youtube: ['#contents'],	
-};
-
-
 // jQuery code to simplify above JS code
 var contents = $('#contents');
 var parent = $('#contents').parentElement;
@@ -73,7 +66,7 @@ window.addEventListener("load", function(){
 	const currUrl = getBaseUrl();
 	chrome.storage.sync.get(['siteData'], function(res){
 		if(getBaseUrl() in res.siteData){
-			const child  = siteInfo[currUrl][0];
+			const child = res.siteData[getBaseUrl()][0];
 			setElements(child);
 			checkExtensionStatus();
 		}
