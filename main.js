@@ -1,6 +1,6 @@
-// jQuery code to simplify above JS code
-var contents = $('#contents');
-var parent = $('#contents').parentElement;
+// Global variables for contents to hide on its current page
+var contents = null;
+var parent = null;
 
 
 /*
