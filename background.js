@@ -25,7 +25,7 @@ function initializeSiteData(){
 	// Sites to block with their associated elements to block
 	var siteInfo = {
 		reddit: ['._31N0dvxfpsO6Ur5AKx4O5d', '#siteTable'],
-		youtube: ['#contents'],	
+		youtube: ['#contents'],
 	};
 	chrome.storage.sync.set({['siteData'] : siteInfo}, function(res){
 		if(!chrome.runtime.lastError){
