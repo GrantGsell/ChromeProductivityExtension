@@ -1,9 +1,35 @@
- 'use. strict';
-chrome.runtime.getBackgroundPage(darkMode);
-chrome.runtime.getBackgroundPage(extensionOnOff);
-chrome.runtime.getBackgroundPage(setBtnEvent);
-chrome.runtime.getBackgroundPage(alwaysBtnPressed);
-chrome.runtime.getBackgroundPage(onceBtnPressed);
+/*
+ * Name       : None.
+ * Purpose    : Set the dynamic elements of the popup when its opened, call 
+ *                functions when the DOM is fully loaded.
+ * Parameters : None.
+ * Returns    : None.
+ * Notes      : Both toggle switches and time elements are affected.
+ */
+window.onload = function(){
+	// Read Darkmode Toggle Switch Local Data
+	chrome.storage.local.get(['test'], function(res){
+		const toggleElem = document.getElementById('test');
+		toggleElem.checked = res.test;
+		changeTheme(res.test);
+	});
+
+	// Read onOff Toggle Switch Local Data
+	chrome.storage.local.get(['onOff'], function(res){
+		const toggleOnOff = document.getElementById('onOff');
+		toggleOnOff.checked = res.onOff;
+	});
+
+	// Read Time Input Local Data
+	getActiveTime();
+
+	// Call functions when DOM fully loads
+	darkMode();
+	extensionOnOff();
+	setBtnEvent();
+	alwaysBtnPressed();
+	onceBtnPressed();
+}
 
 
 /*
@@ -43,41 +69,17 @@ function extensionOnOff(){
  */
 function toggleChange(elemId, callback){
 	const elem = document.getElementById(elemId);
-	
-	// Set event listener for toggle change
-	return elem.addEventListener('change', function(){
-		localMemSet(elemId, elem.checked);
-		callback(elem.checked);
-		chrome.storage.local.set({'test': elem.checked}, function(){
+
+	if(elem){
+		// Set event listener for toggle change
+		return elem.addEventListener('change', function(){
+			localMemSet(elemId, elem.checked);
 			callback(elem.checked);
+			chrome.storage.local.set({'test': elem.checked}, function(){
+				callback(elem.checked);
+			});
 		});
-	});
-}
-
-
-/*
- * Name       : None.
- * Purpose    : Set the dynamic elements of the popup when its opened.
- * Parameters : None.
- * Returns    : None.
- * Notes      : Both toggle switches and time elements are affected.
- */
-window.onload = function(){
-	// Read Darkmode Toggle Switch Local Data
-	chrome.storage.local.get(['test'], function(res){
-		const toggleElem = document.getElementById('test');
-		toggleElem.checked = res.test;
-		changeTheme(res.test);
-	});
-
-	// Read onOff Toggle Switch Local Data
-	chrome.storage.local.get(['onOff'], function(res){
-		const toggleOnOff = document.getElementById('onOff');
-		toggleOnOff.checked = res.onOff;
-	});
-
-	// Read Time Input Local Data
-	getActiveTime();
+	}
 }
 
 
