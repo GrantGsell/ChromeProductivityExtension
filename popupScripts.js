@@ -93,11 +93,13 @@ function toggleChange(elemId, callback){
  */
 function turnExtensionOnOff(){
 	const elem = document.getElementById("onOff");
-	return elem.addEventListener('change', function(){
-		chrome.storage.local.set({'onOff': elem.checked}, function(){
-			// On Off has been set, do something
+	if(elem){
+		return elem.addEventListener('change', function(){
+			chrome.storage.local.set({'onOff': elem.checked}, function(){
+				// On Off has been set, do something
+			});
 		});
-	});
+	}
 }
 
 
@@ -198,9 +200,11 @@ function setBtnEvent(){
  */
 function eventBtnClick(btnId, callback){
 	const elem = document.getElementById(btnId);
-	return elem.addEventListener('click', function(){
-		callback();
-	});
+	if(elem){
+		return elem.addEventListener('click', function(){
+			callback();
+		});
+	}
 }
 
 
