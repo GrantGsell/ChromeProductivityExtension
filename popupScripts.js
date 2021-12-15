@@ -352,7 +352,7 @@ function changeTheme(themeFlag){
 		once.style.background = "lightgrey";
 		always.style.background = "lightgrey";
 		active.style.color = "#000000";
-		set.style.background = "#FFFFFF";
+		set.style.background = "lightgrey";
 		start.style.background = "lightgrey";
 		end.style.background = "lightgrey";
 	}
