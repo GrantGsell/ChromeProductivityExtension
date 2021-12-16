@@ -2,6 +2,12 @@
 var contents = null;
 var parent = null;
 
+// Global variable for replacement image
+var replacementUrl = "https://github.com/GrantGsell/ChromeProductivityExtension/blob/main/replacement.png?raw=true";
+var image = new Image();
+image.src = replacementUrl;
+image.id = "replacementImage";
+
 
 /*
  * Name       : None.
@@ -44,7 +50,9 @@ function checkExtensionStatus(){
 				var newTime = Date.parse(currTime);
 				if(res.onOff && (time0 <= newTime && newTime <= time1)){
 					contents.hide("fast");
+					parent.prepend(image);
 				}else{
+					$("#" + image.id).remove();
 					contents.show("fast");
 				}
 			});
@@ -128,7 +136,7 @@ function getBaseUrl(){
  */
 function setElements(child){
 	contents = $(child);
-	parent = $(child).parentElement;
+	parent = contents[0].parentNode;
 }
 
 
