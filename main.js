@@ -48,7 +48,7 @@ function checkExtensionStatus(){
 				var time0 = Date.parse(currDate + res.timeStart);
 				var time1 = Date.parse(currDate + res.timeEnd);
 				var newTime = Date.parse(currTime);
-				if(res.onOff && (time0 <= newTime && newTime <= time1)){
+				if(res.onOff && ((res.timeStart == '' && res.timeEnd == '') || (time0 <= newTime && newTime <= time1))){
 					contents.hide("fast");
 					parent.prepend(image);
 				}else{
