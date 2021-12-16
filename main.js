@@ -173,10 +173,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(request) {
         if (request.msg == "Once Btn Pressed") {
 			contents.show();
+			$("#" + image.id).remove();
             sendResponse({ data: true });
         }
 		else if(request.msg == "Always Btn Pressed"){
 			contents.show();
+			$("#" + image.id).remove();
 			try{
 				setSiteObject();
 			}
