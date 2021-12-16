@@ -46,12 +46,26 @@ function initializeSiteData(){
 function initializeStorageData(){
 	const darkModeToggle = 'test';
 	const onOffToggle = 'onOfff';
+	
+	// Initialize buttons
 	chrome.storage.local.set({['test'] : false}, function(res){
 		if(!chrome.runtime.lastError){
 			// Set storage data successfully
 		}
 	});
 	chrome.storage.local.set({['onOff'] :  false}, function(res){
+		if(!chrome.runtime.lastError){
+			// Set storage data successfully
+		}
+	});
+
+	// Initialize Time Inputs
+	chrome.storage.local.set({['timeStart'] : ''}, function(res){
+		if(!chrome.runtime.lastError){
+			// Set storage data successfully
+		}
+	});
+	chrome.storage.local.set({['timeEnd'] :  ''}, function(res){
 		if(!chrome.runtime.lastError){
 			// Set storage data successfully
 		}
