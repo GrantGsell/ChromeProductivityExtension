@@ -1,4 +1,4 @@
-# ChromeProductivityExtension
+# Chrome Productivity Extension
 The Focus chrome extension is a powerful productivity tool that encourages the user to keep a focused mindset while working. This extension allows the user to load their chosen distracting website, for instance YouTube, but instead of seeing the regular front page content video feed the user will be shown an inspirational image. Specifically, the image is of Hanauma Bay located in East Honolulu with an inspiring message that pushes them to achieve their goals.
 
 What makes this extension truly powerful is that the user does not need to switch off the extension, in the chrome extension page, if they want to see the feed or search for a particular video. Additionally, because the user can turn off or suspend the extension at will there’s less of a psychological cost than if the site was fully blocked and unreachable.
