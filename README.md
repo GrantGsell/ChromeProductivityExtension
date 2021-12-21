@@ -7,3 +7,5 @@ Adding to this extension’s versatility is a host of dynamic functionality supp
 The next useful aspect of this extension are the two pause buttons on the popup. The first button pauses the extension once, and in doing so the pages contents are returned to the screen and removes the motivational placeholder image. The second always pause button removes the blocked content site from the list of sites that the extension will be active on and likewise returns the content to the website. 
 
 Lastly, the user can set the range of time, that the extension should be active. The user does this by inputting two different times in the start and end time input boxes, and then pressing the accompanying set buttons.  
+
+<img src="https://github.com/GrantGsell/ChromeProductivityExtension/blob/main/focus_extension_v0.gif" width="1200" height="675">
